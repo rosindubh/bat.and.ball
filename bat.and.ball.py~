@@ -46,44 +46,44 @@ clock=pygame.time.Clock()
 #main game loop
 while done==0:
 
-	screen.fill((0,0,0))
+    screen.fill((0,0,0))
 
-	#event handling
-	for event in pygame.event.get():#if we click something...
-		if event.type==pygame.QUIT:#if we click close...
-			done=1#this will cause the loop to finish
+    #event handling
+    for event in pygame.event.get():#if we click something...
+        if event.type==pygame.QUIT:#if we click close...
+            done=1#this will cause the loop to finish
 
-	#moves bat in accordance with the mouse pointer
-	position=pygame.mouse.get_pos()
-	batrect.centerx=position[0]
+    #moves bat in accordance with the mouse pointer
+    position=pygame.mouse.get_pos()
+    batrect.centerx=position[0]
 
-	#move the ball
-	ballrect.left+=speed[0]
-	ballrect.top+=speed[1]
+#move the ball
+ballrect.left+=speed[0]
+ballrect.top+=speed[1]
 
-	#collision detection
-	if ballrect.colliderect(batrect):
-		speed[1]=-speed[1]
+#collision detection
+if ballrect.colliderect(batrect):
+	speed[1]=-speed[1]
 
-	#check if the ball is going off screen
-	if ballrect.left<0 or ballrect.right>size[0]:
-		speed[0]=-speed[0]
-	if ballrect.top<0:
-		speed[1]=-speed[1]
+#check if the ball is going off screen
+if ballrect.left<0 or ballrect.right>size[0]:
+	speed[0]=-speed[0]
+if ballrect.top<0:
+	speed[1]=-speed[1]
 
-	#print "Game Over" if the ball leaves screen
-	if ballrect.top > size[1]:
-		screen.blit(text,textRect)
-		pygame.display.flip()
-		pygame.time.wait(2000)#2000 milliseconds pause
-		ballrect.top=0; ballrect.left=(size[0]/2) #reset the ball position
-
-	screen.blit(ball_surf, ballrect)
-	screen.blit(bat_surf, batrect)
-
-	#set the loop to 60 cycles per second
-	clock.tick(60)
-
-	#update the display
+#print "Game Over" if the ball leaves screen
+if ballrect.top > size[1]:
+	screen.blit(text,textRect)
 	pygame.display.flip()
+	pygame.time.wait(2000)#2000 milliseconds pause
+	ballrect.top=0; ballrect.left=(size[0]/2) #reset the ball position
+
+screen.blit(ball_surf, ballrect)
+screen.blit(bat_surf, batrect)
+
+#set the loop to 60 cycles per second
+clock.tick(60)
+
+#update the display
+pygame.display.flip()
 
